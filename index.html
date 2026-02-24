@@ -2,7 +2,7 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>Rawan ✨</title>
+<title>روان ✨</title>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Amiri&display=swap');
@@ -11,14 +11,23 @@ body {
   margin: 0;
   overflow: hidden;
   font-family: 'Amiri', serif;
-  background: radial-gradient(circle at top, #1b0033, #000);
+  background: url("https://i.imgur.com/0Z7IVxB.jpg") center/cover no-repeat;
   color: white;
   text-align: center;
 }
 
+/* Moon glow */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at top, rgba(255,255,255,0.15), transparent 60%);
+}
+
+/* Lantern */
 .lantern {
   position: absolute;
-  top: 40px;
+  top: 30px;
   left: 50%;
   transform: translateX(-50%);
   width: 120px;
@@ -30,22 +39,23 @@ body {
   to   { filter: drop-shadow(0 0 30px gold); }
 }
 
+/* Envelope */
 .envelope {
   position: absolute;
-  bottom: 18%;
+  bottom: 15%;
   left: 50%;
   transform: translateX(-50%);
   width: 460px;
-  padding: 40px;
-  background: linear-gradient(135deg, #ff9acb, #ffd1e8);
+  padding: 35px;
+  background: linear-gradient(135deg, #ff9acb, #ffd6ea);
   border-radius: 22px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
 }
 
 .question {
   font-size: 26px;
   color: #4a0033;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 
 button {
@@ -64,37 +74,19 @@ button {
 }
 
 .no {
-  background: #bbb;
+  background: #ccc;
 }
 
 .poem {
   font-size: 26px;
   line-height: 1.9;
   color: #4a0033;
-  opacity: 0;
-  animation: fadeIn 2s forwards;
+  animation: fade 2s forwards;
 }
 
-@keyframes fadeIn {
-  to { opacity: 1; }
-}
-
-.flower {
-  position: absolute;
-  top: -50px;
-  font-size: 24px;
-  animation: fall linear infinite;
-}
-
-@keyframes fall {
-  to { transform: translateY(110vh) rotate(360deg); }
-}
-
-.rawan {
-  position: absolute;
-  font-size: 22px;
-  color: #ffb6d9;
-  opacity: 0.6;
+@keyframes fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 </style>
 </head>
@@ -109,17 +101,16 @@ button {
       هل تود أن تستمع لشيء مميز؟<br>
       لقد كتبتُ شيئًا لك
     </div>
-    <button class="yes" onclick="startPoem()">نعم</button>
+    <button class="yes" onclick="start()">نعم</button>
     <button class="no" onclick="closeLetter()">لا</button>
   </div>
 </div>
 
-<audio id="music" loop>
-  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_7f8e6b4f02.mp3">
-</audio>
+<audio id="voice" src="voice.mp3"></audio>
+<audio id="music" src="music.mp3" loop></audio>
 
 <script>
-const poemLines = [
+const lines = [
 "هي ناز خُلِقت لتضيء،",
 "وهو ثلج يرى في الاشتعال خطرًا.",
 "هي صبح يمشي بخطى واضحة",
@@ -133,55 +124,28 @@ const poemLines = [
 "ومن أن تعتذر عن الضوء كأنه خطيئة"
 ];
 
-let index = 0;
+let i = 0;
 const content = document.getElementById("content");
+const voice = document.getElementById("voice");
 const music = document.getElementById("music");
 
-function speak(text) {
-  const msg = new SpeechSynthesisUtterance(text);
-  msg.lang = "ar-SA";
-  msg.rate = 0.85;
-  msg.pitch = 1.2;
-  speechSynthesis.speak(msg);
-}
-
-function startPoem() {
+function start() {
   music.play();
   showLine();
 }
 
 function showLine() {
-  if (index < poemLines.length) {
-    content.innerHTML = `<div class="poem">${poemLines[index]}</div>`;
-    speak(poemLines[index]);
-    index++;
-    setTimeout(showLine, 4500);
+  if (i < lines.length) {
+    content.innerHTML = `<div class="poem">${lines[i]}</div>`;
+    voice.currentTime = 0;
+    voice.play();
+    i++;
+    setTimeout(showLine, 5000);
   }
 }
 
 function closeLetter() {
   document.getElementById("envelope").style.display = "none";
-}
-
-/* Flowers */
-setInterval(() => {
-  const f = document.createElement("div");
-  f.className = "flower";
-  f.innerText = "🌸";
-  f.style.left = Math.random() * 100 + "vw";
-  f.style.animationDuration = (6 + Math.random() * 5) + "s";
-  document.body.appendChild(f);
-  setTimeout(() => f.remove(), 11000);
-}, 450);
-
-/* Rawan floating */
-for (let i = 0; i < 12; i++) {
-  const r = document.createElement("div");
-  r.className = "rawan";
-  r.innerText = "RAWAN";
-  r.style.left = Math.random() * 100 + "vw";
-  r.style.top = Math.random() * 100 + "vh";
-  document.body.appendChild(r);
 }
 </script>
 
