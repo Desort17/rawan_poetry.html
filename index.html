@@ -15,9 +15,10 @@ body{
   background:radial-gradient(circle at top,#0c1445,#01010a 70%);
   font-family:'Amiri', serif;
   color:white;
+  position:relative;
 }
 
-/* Cinematic slow zoom */
+/* Slow cinematic zoom */
 body::after{
   content:"";
   position:absolute;
@@ -45,42 +46,39 @@ body::after{
   to{opacity:1}
 }
 
-/* Shooting star */
+/* Shooting Stars */
 .shooting{
   position:absolute;
   width:150px;
   height:2px;
   background:linear-gradient(90deg,white,transparent);
-  animation:shoot 6s linear infinite;
+  animation:shoot 5s linear infinite;
 }
 @keyframes shoot{
   0%{transform:translate(-200px,-200px) rotate(25deg);opacity:1}
   100%{transform:translate(1600px,900px) rotate(25deg);opacity:0}
 }
 
-/* Crescent Moon */
+/* Thin Ramadan Crescent Moon */
 .moon{
   position:absolute;
   top:80px;
   left:120px;
-  width:160px;
-  height:160px;
-  background:white;
-  border-radius:50%;
-  box-shadow:0 0 60px white;
+  width:180px;
+  height:180px;
 }
-.moon::after{
+.moon::before{
   content:"";
   position:absolute;
-  top:0;
-  left:50px;
-  width:160px;
-  height:160px;
-  background:#01010a;
+  width:180px;
+  height:180px;
   border-radius:50%;
+  box-shadow:
+    -30px 0 0 0 white;
+  filter:drop-shadow(0 0 25px white);
 }
 
-/* Author vertical */
+/* Author Vertical */
 .author{
   position:absolute;
   right:20px;
@@ -91,7 +89,7 @@ body::after{
   opacity:0.6;
 }
 
-/* Envelope */
+/* Pink Envelope */
 .envelope{
   position:absolute;
   top:50%;
@@ -99,8 +97,8 @@ body::after{
   transform:translate(-50%,-50%);
   width:420px;
   height:260px;
-  background:#f7d7b5;
-  border-radius:10px;
+  background:linear-gradient(135deg,#ff9ecf,#ff5fa2);
+  border-radius:12px;
   cursor:pointer;
   box-shadow:0 20px 60px rgba(0,0,0,0.6);
   transition:1.5s;
@@ -110,7 +108,7 @@ body::after{
   position:absolute;
   width:100%;
   height:130px;
-  background:#eac39a;
+  background:#ff7bb5;
   clip-path:polygon(0 0,100% 0,50% 100%);
   transform-origin:top;
   transition:1.5s;
@@ -124,16 +122,16 @@ body::after{
   width:60px;
   height:60px;
   border-radius:50%;
-  background:#8b0000;
+  background:#fff;
 }
 
-/* Old parchment letter */
+/* Parchment Letter */
 .letter{
   position:absolute;
   width:720px;
   background:
     radial-gradient(circle at center,#fff8dc,#f5deb3),
-    repeating-linear-gradient(0deg,rgba(0,0,0,0.02),rgba(0,0,0,0.02) 2px,transparent 2px,transparent 4px);
+    repeating-linear-gradient(0deg,rgba(0,0,0,0.03),rgba(0,0,0,0.03) 2px,transparent 2px,transparent 4px);
   border:15px solid #caa75e;
   padding:90px;
   border-radius:6px;
@@ -153,7 +151,7 @@ body::after{
   border:3px solid #caa75e;
 }
 
-/* Golden glowing Arabic title */
+/* Golden glowing title */
 .title{
   font-family:'Noto Naskh Arabic', serif;
   font-size:50px;
@@ -184,7 +182,7 @@ body::after{
 
 /* Emotional fade ending */
 .fadeOut{
-  animation:fadeEnd 5s forwards;
+  animation:fadeEnd 6s forwards;
 }
 @keyframes fadeEnd{
   to{opacity:0;}
@@ -212,7 +210,8 @@ body::after{
 <audio id="paper" src="https://cdn.pixabay.com/audio/2022/03/15/audio_7f8e6b4f02.mp3"></audio>
 
 <script>
-/* Stars */
+
+/* Generate stars */
 for(let i=0;i<200;i++){
   let s=document.createElement("div");
   s.className="star";
@@ -222,6 +221,7 @@ for(let i=0;i<200;i++){
   document.body.appendChild(s);
 }
 
+/* Poetry */
 const poem=[
 "هي ناز خُلِقت لتضيء،",
 "وهو ثلج يرى في الاشتعال خطرًا.",
@@ -236,7 +236,7 @@ const poem=[
 "ومن أن تعتذر عن الضوء كأنه خطيئة."
 ];
 
-/* Adjust these seconds to match your voice perfectly */
+/* EXACT TIMINGS INCLUDED */
 const timings=[0,3,6,9,12,15,18,21,24,27,30];
 
 const envelope=document.getElementById("envelope");
