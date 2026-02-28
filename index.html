@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>رسالة من روان</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cinzel:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@700&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -12,22 +12,50 @@
 body{
   height:100vh;
   overflow:hidden;
+  background:radial-gradient(circle at top,#0c1445,#01010a 70%);
   font-family:'Amiri', serif;
-  background:radial-gradient(circle at top,#1b1f4d,#050510 70%);
-  display:flex;
-  justify-content:center;
-  align-items:center;
   color:white;
 }
 
-/* Stars */
-body::before{
+/* Cinematic slow zoom */
+body::after{
   content:"";
   position:absolute;
-  inset:0;
-  background:radial-gradient(white 1px, transparent 1px);
-  background-size:3px 3px;
-  opacity:0.15;
+  inset:-10%;
+  background:inherit;
+  animation:zoom 40s ease-in-out infinite alternate;
+  z-index:-1;
+}
+@keyframes zoom{
+  from{transform:scale(1);}
+  to{transform:scale(1.1);}
+}
+
+/* Stars */
+.star{
+  position:absolute;
+  width:2px;
+  height:2px;
+  background:white;
+  border-radius:50%;
+  animation:twinkle 2s infinite alternate;
+}
+@keyframes twinkle{
+  from{opacity:0.3}
+  to{opacity:1}
+}
+
+/* Shooting star */
+.shooting{
+  position:absolute;
+  width:150px;
+  height:2px;
+  background:linear-gradient(90deg,white,transparent);
+  animation:shoot 6s linear infinite;
+}
+@keyframes shoot{
+  0%{transform:translate(-200px,-200px) rotate(25deg);opacity:1}
+  100%{transform:translate(1600px,900px) rotate(25deg);opacity:0}
 }
 
 /* Crescent Moon */
@@ -35,43 +63,44 @@ body::before{
   position:absolute;
   top:80px;
   left:120px;
-  width:150px;
-  height:150px;
-  background:radial-gradient(circle at 30% 30%, #fff8cc, #ffd700);
+  width:160px;
+  height:160px;
+  background:white;
   border-radius:50%;
-  box-shadow:0 0 60px gold;
+  box-shadow:0 0 60px white;
 }
 .moon::after{
   content:"";
   position:absolute;
   top:0;
   left:50px;
-  width:150px;
-  height:150px;
-  background:#050510;
+  width:160px;
+  height:160px;
+  background:#01010a;
   border-radius:50%;
 }
 
-/* Author */
+/* Author vertical */
 .author{
   position:absolute;
-  top:40px;
-  width:100%;
-  text-align:center;
-  font-family:'Cinzel', serif;
-  font-size:60px;
+  right:20px;
+  top:50%;
+  transform:translateY(-50%) rotate(90deg);
+  font-size:50px;
   letter-spacing:8px;
-  color:gold;
-  text-shadow:0 0 25px gold;
+  opacity:0.6;
 }
 
 /* Envelope */
 .envelope{
-  width:400px;
-  height:250px;
-  background:linear-gradient(135deg,#ffd6ec,#ff9ecf);
-  border-radius:15px;
-  position:relative;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:420px;
+  height:260px;
+  background:#f7d7b5;
+  border-radius:10px;
   cursor:pointer;
   box-shadow:0 20px 60px rgba(0,0,0,0.6);
   transition:1.5s;
@@ -80,8 +109,8 @@ body::before{
 .flap{
   position:absolute;
   width:100%;
-  height:125px;
-  background:#ffc1e0;
+  height:130px;
+  background:#eac39a;
   clip-path:polygon(0 0,100% 0,50% 100%);
   transform-origin:top;
   transition:1.5s;
@@ -89,61 +118,76 @@ body::before{
 
 .seal{
   position:absolute;
-  top:95px;
+  top:105px;
   left:50%;
   transform:translateX(-50%);
   width:60px;
   height:60px;
-  background:gold;
   border-radius:50%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  color:#550033;
-  font-size:22px;
+  background:#8b0000;
 }
 
-/* Letter Template */
+/* Old parchment letter */
 .letter{
   position:absolute;
-  width:650px;
-  background:#fffaf0;
-  border:8px solid #d4af37;
-  padding:60px;
-  border-radius:12px;
-  color:#3a0033;
-  font-size:28px;
-  line-height:2.2;
-  box-shadow:0 30px 80px rgba(0,0,0,0.7);
+  width:720px;
+  background:
+    radial-gradient(circle at center,#fff8dc,#f5deb3),
+    repeating-linear-gradient(0deg,rgba(0,0,0,0.02),rgba(0,0,0,0.02) 2px,transparent 2px,transparent 4px);
+  border:15px solid #caa75e;
+  padding:90px;
+  border-radius:6px;
+  font-size:30px;
+  line-height:2.3;
+  color:#3b1f0f;
+  box-shadow:0 40px 100px rgba(0,0,0,0.8);
   opacity:0;
-  transform:translateY(50px) scale(0.9);
-  transition:1.8s;
+  transform:translateY(80px) scale(0.9);
+  transition:2.5s;
 }
 
 .letter::before{
   content:"";
   position:absolute;
-  inset:15px;
-  border:2px dashed #d4af37;
-  border-radius:8px;
+  inset:25px;
+  border:3px solid #caa75e;
 }
 
-/* Open animation */
-.open .flap{transform:rotateX(180deg);}
-.open{transform:translateY(-200px);}
-.show{
-  opacity:1;
-  transform:translateY(0) scale(1);
+/* Golden glowing Arabic title */
+.title{
+  font-family:'Noto Naskh Arabic', serif;
+  font-size:50px;
+  text-align:center;
+  margin-bottom:40px;
+  color:gold;
+  text-shadow:0 0 15px gold, 0 0 40px rgba(255,215,0,0.7);
 }
 
 /* Line animation */
 .line{
   opacity:0;
   transform:translateY(20px);
-  animation:fadeUp 2s forwards;
+  transition:1.5s;
 }
-@keyframes fadeUp{
-  to{opacity:1;transform:translateY(0);}
+.line.showLine{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* Open animation */
+.open .flap{transform:rotateX(180deg);}
+.open{transform:translate(-50%,-85%);}
+.show{
+  opacity:1;
+  transform:translateY(0) scale(1);
+}
+
+/* Emotional fade ending */
+.fadeOut{
+  animation:fadeEnd 5s forwards;
+}
+@keyframes fadeEnd{
+  to{opacity:0;}
 }
 </style>
 </head>
@@ -152,13 +196,15 @@ body::before{
 
 <div class="moon"></div>
 <div class="author">RAWAN</div>
+<div class="shooting"></div>
 
 <div class="envelope" id="envelope">
   <div class="flap"></div>
-  <div class="seal">✦</div>
+  <div class="seal"></div>
 </div>
 
 <div class="letter" id="letter">
+  <div class="title">رسالة إلى قلبٍ لا يشبه أحدًا</div>
   <div id="poem"></div>
 </div>
 
@@ -166,6 +212,16 @@ body::before{
 <audio id="paper" src="https://cdn.pixabay.com/audio/2022/03/15/audio_7f8e6b4f02.mp3"></audio>
 
 <script>
+/* Stars */
+for(let i=0;i<200;i++){
+  let s=document.createElement("div");
+  s.className="star";
+  s.style.top=Math.random()*100+"vh";
+  s.style.left=Math.random()*100+"vw";
+  s.style.animationDuration=(1+Math.random()*3)+"s";
+  document.body.appendChild(s);
+}
+
 const poem=[
 "هي ناز خُلِقت لتضيء،",
 "وهو ثلج يرى في الاشتعال خطرًا.",
@@ -180,7 +236,9 @@ const poem=[
 "ومن أن تعتذر عن الضوء كأنه خطيئة."
 ];
 
-let i=0;
+/* Adjust these seconds to match your voice perfectly */
+const timings=[0,3,6,9,12,15,18,21,24,27,30];
+
 const envelope=document.getElementById("envelope");
 const letter=document.getElementById("letter");
 const poemDiv=document.getElementById("poem");
@@ -191,22 +249,28 @@ envelope.onclick=()=>{
   envelope.classList.add("open");
   paper.play();
   voice.play();
+
   setTimeout(()=>{
     letter.classList.add("show");
-    reveal();
+    showLines();
   },1500);
+
+  voice.onended=()=>{
+    document.body.classList.add("fadeOut");
+  };
 };
 
-function reveal(){
-  if(i<poem.length){
-    let line=document.createElement("div");
-    line.className="line";
-    line.style.animationDelay="0s";
-    line.innerText=poem[i];
-    poemDiv.appendChild(line);
-    i++;
-    setTimeout(reveal,3200);
-  }
+function showLines(){
+  poem.forEach((line,index)=>{
+    let div=document.createElement("div");
+    div.className="line";
+    div.innerText=line;
+    poemDiv.appendChild(div);
+
+    setTimeout(()=>{
+      div.classList.add("showLine");
+    },timings[index]*1000);
+  });
 }
 </script>
 
