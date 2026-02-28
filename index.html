@@ -4,163 +4,154 @@
 <meta charset="UTF-8">
 <title>رسالة من روان</title>
 
-<!-- Arabic Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Scheherazade+New:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cinzel:wght@600&display=swap" rel="stylesheet">
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box;}
 
 body{
-  font-family:'Amiri', serif;
-  overflow:hidden;
   height:100vh;
-  background:
-  radial-gradient(circle at top, rgba(20,25,70,0.9), #050510),
-  url("https://images.unsplash.com/photo-1524492449090-1c5b2c8b7f6e?auto=format&fit=crop&w=1920&q=80");
-  background-size:cover;
-  background-position:center;
+  overflow:hidden;
+  font-family:'Amiri', serif;
+  background:radial-gradient(circle at top,#1b1f4d,#050510 70%);
+  display:flex;
+  justify-content:center;
+  align-items:center;
   color:white;
+}
+
+/* Stars */
+body::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(white 1px, transparent 1px);
+  background-size:3px 3px;
+  opacity:0.15;
 }
 
 /* Crescent Moon */
 .moon{
   position:absolute;
-  top:60px;
-  left:100px;
-  width:140px;
-  height:140px;
+  top:80px;
+  left:120px;
+  width:150px;
+  height:150px;
   background:radial-gradient(circle at 30% 30%, #fff8cc, #ffd700);
   border-radius:50%;
   box-shadow:0 0 60px gold;
 }
-.moon:after{
+.moon::after{
   content:"";
   position:absolute;
   top:0;
-  left:40px;
-  width:140px;
-  height:140px;
+  left:50px;
+  width:150px;
+  height:150px;
   background:#050510;
   border-radius:50%;
 }
 
-/* Lanterns */
-.lantern{
-  position:absolute;
-  width:80px;
-  animation:float 4s ease-in-out infinite alternate;
-  filter:drop-shadow(0 0 20px gold);
-}
-.l1{top:50px; right:150px;}
-.l2{top:80px; right:350px;}
-@keyframes float{
-  from{transform:translateY(0)}
-  to{transform:translateY(20px)}
-}
-
-/* Flower rain */
-.flower{
-  position:absolute;
-  width:20px;
-  height:20px;
-  background:radial-gradient(circle, pink, transparent);
-  border-radius:50%;
-  animation:fall linear infinite;
-}
-@keyframes fall{
-  from{transform:translateY(-50px)}
-  to{transform:translateY(110vh)}
-}
-
-/* Author Name */
+/* Author */
 .author{
   position:absolute;
-  top:30px;
+  top:40px;
   width:100%;
   text-align:center;
-  font-family:'Scheherazade New', serif;
-  font-size:70px;
+  font-family:'Cinzel', serif;
+  font-size:60px;
+  letter-spacing:8px;
   color:gold;
-  text-shadow:0 0 20px gold;
-  letter-spacing:5px;
+  text-shadow:0 0 25px gold;
 }
 
 /* Envelope */
 .envelope{
-  position:absolute;
-  top:45%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  width:420px;
-  height:260px;
+  width:400px;
+  height:250px;
   background:linear-gradient(135deg,#ffd6ec,#ff9ecf);
   border-radius:15px;
+  position:relative;
   cursor:pointer;
-  box-shadow:0 20px 50px rgba(0,0,0,0.6);
+  box-shadow:0 20px 60px rgba(0,0,0,0.6);
   transition:1.5s;
 }
+
 .flap{
   position:absolute;
   width:100%;
-  height:130px;
+  height:125px;
   background:#ffc1e0;
   clip-path:polygon(0 0,100% 0,50% 100%);
   transform-origin:top;
   transition:1.5s;
 }
+
 .seal{
   position:absolute;
-  top:105px;
+  top:95px;
   left:50%;
   transform:translateX(-50%);
   width:60px;
   height:60px;
-  border-radius:50%;
   background:gold;
+  border-radius:50%;
   display:flex;
-  align-items:center;
   justify-content:center;
+  align-items:center;
   color:#550033;
   font-size:22px;
 }
 
-/* Letter */
+/* Letter Template */
 .letter{
   position:absolute;
-  top:18%;
-  left:50%;
-  transform:translateX(-50%);
   width:650px;
-  background:#fffaf3;
+  background:#fffaf0;
+  border:8px solid #d4af37;
+  padding:60px;
+  border-radius:12px;
   color:#3a0033;
-  padding:50px;
-  border-radius:15px;
   font-size:28px;
   line-height:2.2;
-  box-shadow:0 20px 60px rgba(0,0,0,0.7);
+  box-shadow:0 30px 80px rgba(0,0,0,0.7);
   opacity:0;
-  transition:2s;
+  transform:translateY(50px) scale(0.9);
+  transition:1.8s;
+}
+
+.letter::before{
+  content:"";
+  position:absolute;
+  inset:15px;
+  border:2px dashed #d4af37;
+  border-radius:8px;
 }
 
 /* Open animation */
 .open .flap{transform:rotateX(180deg);}
-.open{transform:translate(-50%,-70%);}
-.show{opacity:1;}
+.open{transform:translateY(-200px);}
+.show{
+  opacity:1;
+  transform:translateY(0) scale(1);
+}
+
+/* Line animation */
+.line{
+  opacity:0;
+  transform:translateY(20px);
+  animation:fadeUp 2s forwards;
+}
+@keyframes fadeUp{
+  to{opacity:1;transform:translateY(0);}
+}
 </style>
 </head>
 
 <body>
 
 <div class="moon"></div>
-
 <div class="author">RAWAN</div>
-
-<img src="https://i.imgur.com/Vw3YQ8N.png" class="lantern l1">
-<img src="https://i.imgur.com/Vw3YQ8N.png" class="lantern l2">
 
 <div class="envelope" id="envelope">
   <div class="flap"></div>
@@ -175,15 +166,6 @@ body{
 <audio id="paper" src="https://cdn.pixabay.com/audio/2022/03/15/audio_7f8e6b4f02.mp3"></audio>
 
 <script>
-/* Flower rain generator */
-for(let i=0;i<25;i++){
-  let f=document.createElement("div");
-  f.className="flower";
-  f.style.left=Math.random()*100+"vw";
-  f.style.animationDuration=(5+Math.random()*5)+"s";
-  document.body.appendChild(f);
-}
-
 const poem=[
 "هي ناز خُلِقت لتضيء،",
 "وهو ثلج يرى في الاشتعال خطرًا.",
@@ -212,12 +194,16 @@ envelope.onclick=()=>{
   setTimeout(()=>{
     letter.classList.add("show");
     reveal();
-  },1600);
+  },1500);
 };
 
 function reveal(){
   if(i<poem.length){
-    poemDiv.innerHTML+=poem[i]+"<br>";
+    let line=document.createElement("div");
+    line.className="line";
+    line.style.animationDelay="0s";
+    line.innerText=poem[i];
+    poemDiv.appendChild(line);
     i++;
     setTimeout(reveal,3200);
   }
