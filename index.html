@@ -1,134 +1,166 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <title>رسالة من روان</title>
 
+<!-- Arabic Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Scheherazade+New:wght@700&display=swap" rel="stylesheet">
+
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Amiri&display=swap');
-
-body {
-  margin: 0;
-  overflow: hidden;
-  font-family: 'Amiri', serif;
-  background: radial-gradient(circle at top, #2c2f6d, #0b0b1f);
-  color: white;
-  text-align: center;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
-/* Stars */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: url("https://i.imgur.com/7b1Yq6H.png");
-  opacity: 0.3;
+body{
+  font-family:'Amiri', serif;
+  overflow:hidden;
+  height:100vh;
+  background:
+  radial-gradient(circle at top, rgba(20,25,70,0.9), #050510),
+  url("https://images.unsplash.com/photo-1524492449090-1c5b2c8b7f6e?auto=format&fit=crop&w=1920&q=80");
+  background-size:cover;
+  background-position:center;
+  color:white;
 }
 
-/* Lantern */
-.lantern {
-  position: absolute;
-  top: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 120px;
-  animation: glow 3s infinite alternate;
+/* Crescent Moon */
+.moon{
+  position:absolute;
+  top:60px;
+  left:100px;
+  width:140px;
+  height:140px;
+  background:radial-gradient(circle at 30% 30%, #fff8cc, #ffd700);
+  border-radius:50%;
+  box-shadow:0 0 60px gold;
 }
-@keyframes glow {
-  from { filter: drop-shadow(0 0 10px gold); }
-  to { filter: drop-shadow(0 0 30px gold); }
+.moon:after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:40px;
+  width:140px;
+  height:140px;
+  background:#050510;
+  border-radius:50%;
+}
+
+/* Lanterns */
+.lantern{
+  position:absolute;
+  width:80px;
+  animation:float 4s ease-in-out infinite alternate;
+  filter:drop-shadow(0 0 20px gold);
+}
+.l1{top:50px; right:150px;}
+.l2{top:80px; right:350px;}
+@keyframes float{
+  from{transform:translateY(0)}
+  to{transform:translateY(20px)}
+}
+
+/* Flower rain */
+.flower{
+  position:absolute;
+  width:20px;
+  height:20px;
+  background:radial-gradient(circle, pink, transparent);
+  border-radius:50%;
+  animation:fall linear infinite;
+}
+@keyframes fall{
+  from{transform:translateY(-50px)}
+  to{transform:translateY(110vh)}
+}
+
+/* Author Name */
+.author{
+  position:absolute;
+  top:30px;
+  width:100%;
+  text-align:center;
+  font-family:'Scheherazade New', serif;
+  font-size:70px;
+  color:gold;
+  text-shadow:0 0 20px gold;
+  letter-spacing:5px;
 }
 
 /* Envelope */
-.envelope {
-  position: absolute;
-  top: 35%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 420px;
-  height: 260px;
-  background: linear-gradient(135deg, #ffd1e8, #ff9acb);
-  border-radius: 16px;
-  cursor: pointer;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-  transition: transform 1.5s ease;
+.envelope{
+  position:absolute;
+  top:45%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:420px;
+  height:260px;
+  background:linear-gradient(135deg,#ffd6ec,#ff9ecf);
+  border-radius:15px;
+  cursor:pointer;
+  box-shadow:0 20px 50px rgba(0,0,0,0.6);
+  transition:1.5s;
 }
-
-.flap {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 130px;
-  background: #ffc0da;
-  clip-path: polygon(0 0,100% 0,50% 100%);
-  transform-origin: top;
-  transition: transform 1.5s ease;
+.flap{
+  position:absolute;
+  width:100%;
+  height:130px;
+  background:#ffc1e0;
+  clip-path:polygon(0 0,100% 0,50% 100%);
+  transform-origin:top;
+  transition:1.5s;
 }
-
-.seal {
-  position: absolute;
-  top: 110px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #d94f8b;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  color: white;
-  font-size: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.seal{
+  position:absolute;
+  top:105px;
+  left:50%;
+  transform:translateX(-50%);
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  background:gold;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#550033;
+  font-size:22px;
 }
 
 /* Letter */
-.letter {
-  position: absolute;
-  top: 18%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 600px;
-  padding: 40px;
-  background: #fff8fb;
-  color: #3a0033;
-  border-radius: 14px;
-  opacity: 0;
-  font-size: 26px;
-  line-height: 2;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-  transition: opacity 2s ease;
+.letter{
+  position:absolute;
+  top:18%;
+  left:50%;
+  transform:translateX(-50%);
+  width:650px;
+  background:#fffaf3;
+  color:#3a0033;
+  padding:50px;
+  border-radius:15px;
+  font-size:28px;
+  line-height:2.2;
+  box-shadow:0 20px 60px rgba(0,0,0,0.7);
+  opacity:0;
+  transition:2s;
 }
 
-/* Open states */
-.open .flap {
-  transform: rotateX(180deg);
-}
-.open {
-  transform: translateX(-50%) translateY(-220px);
-}
-.show {
-  opacity: 1;
-}
-
-/* Title */
-.title {
-  position: absolute;
-  bottom: 40px;
-  width: 100%;
-  font-size: 36px;
-  opacity: 0.8;
-}
-.subtitle {
-  font-size: 18px;
-  opacity: 0.6;
-  margin-top: 8px;
-}
+/* Open animation */
+.open .flap{transform:rotateX(180deg);}
+.open{transform:translate(-50%,-70%);}
+.show{opacity:1;}
 </style>
 </head>
 
 <body>
 
-<img src="https://i.imgur.com/Vw3YQ8N.png" class="lantern">
+<div class="moon"></div>
+
+<div class="author">RAWAN</div>
+
+<img src="https://i.imgur.com/Vw3YQ8N.png" class="lantern l1">
+<img src="https://i.imgur.com/Vw3YQ8N.png" class="lantern l2">
 
 <div class="envelope" id="envelope">
   <div class="flap"></div>
@@ -139,26 +171,20 @@ body::before {
   <div id="poem"></div>
 </div>
 
-<div class="title">
-  رسالة من روان
-  <div class="subtitle">المس الظرف لفتح الرسالة</div>
-</div>
-
-<!-- AUDIO -->
 <audio id="voice" src="voice.mp3"></audio>
 <audio id="paper" src="https://cdn.pixabay.com/audio/2022/03/15/audio_7f8e6b4f02.mp3"></audio>
-<audio id="music" src="https://cdn.pixabay.com/audio/2022/03/15/audio_1f6a2c5a0e.mp3" loop></audio>
 
 <script>
-const envelope = document.getElementById("envelope");
-const letter = document.getElementById("letter");
-const poemDiv = document.getElementById("poem");
+/* Flower rain generator */
+for(let i=0;i<25;i++){
+  let f=document.createElement("div");
+  f.className="flower";
+  f.style.left=Math.random()*100+"vw";
+  f.style.animationDuration=(5+Math.random()*5)+"s";
+  document.body.appendChild(f);
+}
 
-const voice = document.getElementById("voice");
-const paper = document.getElementById("paper");
-const music = document.getElementById("music");
-
-const poem = [
+const poem=[
 "هي ناز خُلِقت لتضيء،",
 "وهو ثلج يرى في الاشتعال خطرًا.",
 "هي صبح يمشي بخطى واضحة،",
@@ -168,30 +194,32 @@ const poem = [
 "لكن الشمس إن انطفأت كي لا تذيب الجليد،",
 "لم تعد شمسًا.",
 "تعبت من محاولة الاعتدال بين الاحتراق والتجمد،",
-"من أن تقيس وهجها كي لا يذوب ما حولها،",
+"ومن أن تقيس وهجها كي لا يذوب ما حولها،",
 "ومن أن تعتذر عن الضوء كأنه خطيئة."
 ];
 
-let i = 0;
+let i=0;
+const envelope=document.getElementById("envelope");
+const letter=document.getElementById("letter");
+const poemDiv=document.getElementById("poem");
+const voice=document.getElementById("voice");
+const paper=document.getElementById("paper");
 
-envelope.onclick = () => {
+envelope.onclick=()=>{
   envelope.classList.add("open");
   paper.play();
-  music.volume = 0.4;
-  music.play();
   voice.play();
-
-  setTimeout(() => {
+  setTimeout(()=>{
     letter.classList.add("show");
     reveal();
-  }, 1600);
+  },1600);
 };
 
-function reveal() {
-  if (i < poem.length) {
-    poemDiv.innerHTML += poem[i] + "<br>";
+function reveal(){
+  if(i<poem.length){
+    poemDiv.innerHTML+=poem[i]+"<br>";
     i++;
-    setTimeout(reveal, 3200);
+    setTimeout(reveal,3200);
   }
 }
 </script>
